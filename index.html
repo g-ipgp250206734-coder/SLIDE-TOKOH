@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teroka Tokoh Pendidikan Malaysia</title>
+<style>
+:root{--green:#173f35;--green2:#285b4c;--gold:#c8a45a;--cream:#f6f0e3;--paper:#fffdf7;--ink:#25362f;--muted:#62736a;--line:#e5dac3}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:radial-gradient(circle at 5% 8%,#e9dfc8 0,transparent 27rem),radial-gradient(circle at 95% 30%,#e2e9dc 0,transparent 25rem),var(--cream);color:var(--ink);font:16px/1.65 Arial,sans-serif}
+header{background:linear-gradient(130deg,#12382f,#285b4c);color:#fff8e8;border-bottom:6px solid var(--gold);padding:44px 20px 35px;position:relative;overflow:hidden}
+header:after{content:"";position:absolute;width:260px;height:260px;border:1px solid #bda76e88;transform:rotate(45deg);right:-115px;top:-125px;border-radius:35px;animation:slowSpin 28s linear infinite}
+header:before{content:"";position:absolute;width:170px;height:170px;border:1px solid #d9c48a66;border-radius:50%;right:10%;bottom:-120px;animation:floatOrb 7s ease-in-out infinite}
+@keyframes slowSpin{to{transform:rotate(405deg)}}
+@keyframes floatOrb{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-18px) scale(1.04)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shimmer{0%,100%{opacity:.55}50%{opacity:1}}
+@keyframes detailIn{from{opacity:0;transform:translateY(8px);max-height:0}to{opacity:1;transform:translateY(0);max-height:800px}}
+.hero{max-width:1100px;margin:auto;position:relative;z-index:1}
+.kicker{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:#e7d39c;font-weight:700}
+h1{font:700 clamp(2.1rem,5vw,3.7rem)/1.1 Georgia,serif;margin:12px 0}
+header p{max-width:800px;color:#f1e9d7;margin:0}
+.audio{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;align-items:center}
+button{cursor:pointer;font-weight:700;border:0;border-radius:9px;padding:10px 14px;transition:.15s}
+button:hover{transform:translateY(-1px)}
+.audio button{background:#f0dfb4;color:#173f35}
+.audio span{font-size:.82rem;color:#e8e0ce}
+.hero-hint{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-size:.85rem;color:#f0dfb4;animation:shimmer 3s ease-in-out infinite}
+.hero-hint b{display:inline-block;font-size:1.1rem;animation:floatOrb 2s ease-in-out infinite}
+nav{position:sticky;top:0;z-index:5;background:var(--paper);border-bottom:1px solid var(--line)}
+.navinner{max-width:1100px;margin:auto;padding:9px 14px;display:flex;gap:6px;overflow:auto}
+nav a{white-space:nowrap;text-decoration:none;color:var(--green);font-weight:700;font-size:.85rem;padding:8px 10px;border-radius:7px}
+nav a:hover{background:#eee4ce}
+main{max-width:1100px;margin:auto;padding:28px 18px 60px}
+.explorer{background:#fffdf7;border:1px solid var(--line);border-radius:16px;padding:18px;margin:0 0 22px;box-shadow:0 10px 25px #193e300a}
+.explorer-top{display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap}
+.explorer h2{font-size:1.25rem;margin:0 0 4px}
+.explorer p{margin:0;color:var(--muted);font-size:.9rem}
+.searchbox{display:flex;gap:8px;flex:1;min-width:min(100%,260px);max-width:390px}
+.searchbox input{width:100%;border:1px solid #cfc3a9;border-radius:10px;padding:11px 13px;font:inherit;background:#fff;color:var(--ink);outline:none}
+.searchbox input:focus{border-color:var(--green2);box-shadow:0 0 0 3px #285b4c20}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
+.filter{background:#eee7d8;color:#385447;border:1px solid transparent;padding:8px 12px;border-radius:99px;font-size:.83rem}
+.filter.active,.filter:hover{background:var(--green);color:#fff8e8}
+.result-count{font-size:.8rem;color:var(--muted);margin-top:12px}
+.tokoh{transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease;opacity:0;animation:fadeUp .65s ease forwards}
+.tokoh[hidden]{display:none}
+.tokoh:nth-child(2){animation-delay:.08s}.tokoh:nth-child(3){animation-delay:.16s}.tokoh:nth-child(4){animation-delay:.24s}.tokoh:nth-child(5){animation-delay:.32s}.tokoh:nth-child(6){animation-delay:.4s}
+.tokoh:hover{transform:translateY(-5px);box-shadow:0 16px 34px #193e3017;border-color:#c8a45a}
+.cardhead{position:relative}.cardhead:after{content:"✦";position:absolute;right:18px;top:18px;color:#b18d43;font-size:1.2rem;opacity:.7;transition:transform .35s}.tokoh:hover .cardhead:after{transform:rotate(45deg) scale(1.2)}
+.detail.open{display:block;animation:detailIn .35s ease both}
+.actions .btn:focus-visible,nav a:focus-visible,button:focus-visible{outline:3px solid #d2ad5c;outline-offset:3px}
+.empty-state{display:none;text-align:center;background:#fffdf7;border:1px dashed #c8b88f;border-radius:14px;padding:26px;color:var(--muted);margin-top:12px}
+.progress-track{height:3px;background:#e7dcc4;position:sticky;top:48px;z-index:6}
+.progress-bar{height:100%;width:0;background:linear-gradient(90deg,#c8a45a,#e5d19b);transition:width .1s linear}
+.intro{padding:19px 22px;border:1px solid var(--line);border-radius:14px;background:#fffdf7;margin-bottom:25px}
+.intro strong{color:var(--green)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}
+.tokoh{background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 6px 18px #193e300b;display:flex;flex-direction:column}
+.cardhead{padding:20px 21px 16px;background:linear-gradient(135deg,#e9efdf,#f8f0dd);border-bottom:1px solid var(--line)}
+.number{font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:#8a6a2a;font-weight:700}
+h2{font:700 1.5rem/1.25 Georgia,serif;color:var(--green);margin:6px 0}
+.role{font-size:.9rem;color:#5b6c62;margin:0}
+.cardbody{padding:18px 21px;display:flex;flex-direction:column;gap:12px;flex:1}
+.cardbody p{margin:0}
+.note{font-size:.88rem;color:var(--muted)}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
+.btn{background:var(--green);color:white}
+.btn.alt{background:#e8ddc4;color:#29483b}
+.detail{display:none;padding:15px 16px;border-left:4px solid var(--gold);background:#f8f3e8;border-radius:0 10px 10px 0}
+.detail.open{display:block}
+.detail h3{margin:0 0 6px;color:var(--green);font-size:1rem}
+.detail ul{padding-left:19px;margin:8px 0}
+.detail li{margin:6px 0}
+.pill{display:inline-block;border-radius:99px;background:#e4ebdf;color:#2c5949;padding:4px 9px;font-size:.76rem;font-weight:700;margin:3px 4px 0 0}
+.bigidea{margin:25px 0;padding:20px 22px;border-radius:14px;background:#173f35;color:#fff8e8;border-left:5px solid var(--gold)}
+.bigidea h2{color:#f0dca9}
+.bigidea p{margin:8px 0 0}
+.refs{margin-top:28px}
+.refs details{background:var(--paper);border:1px solid var(--line);padding:13px 16px;border-radius:10px;margin:8px 0}
+.refs summary{font-weight:700;color:var(--green);cursor:pointer}
+.refs a{color:#215d49;overflow-wrap:anywhere}
+footer{text-align:center;background:#173f35;color:#e8e0ce;padding:23px 16px;font-size:.85rem}
+@media(max-width:760px){.grid{grid-template-columns:1fr}header{padding-top:35px}.explorer-top{align-items:stretch}.searchbox{max-width:none}.progress-track{top:47px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<header>
+<div class="hero">
+<div class="kicker">Eksplorasi Interaktif • Pendidikan Malaysia</div>
+<h1>Kenali Tokoh, Fahami Pemikiran</h1>
+<p>Tekan butang pada setiap kad untuk meneroka latar kehidupan, idea, cabaran dan konteks sejarah enam tokoh. Bahagian ini melengkapkan infografik—bukan mengulang senarai sumbangan dan kesan semata-mata.</p>
+<div class="audio">
+<button id="musicBtn">▶ Mainkan muzik latar</button>
+<button id="soundBtn">Bunyi interaksi: ON</button>
+<span>Muzik bermula selepas ditekan. Bunyi interaksi boleh dimatikan.</span>
+</div>
+<div class="hero-hint"><b>↓</b> Mula meneroka — pilih tokoh atau cari kata kunci</div>
+</div>
+</header>
+<div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+<nav><div class="navinner">
+<a href="#razak">Tun Abdul Razak</a><a href="#talib">Abdul Rahman Talib</a><a href="#aminuddin">Aminuddin Baki</a><a href="#zaba">Za’ba</a><a href="#burhanuddin">Burhanuddin al-Helmi</a><a href="#yakub">Abdul Rahman Ya’kub</a><a href="#rumusan">Apa yang boleh dipelajari?</a>
+</div></nav>
+<main>
+<div class="intro">
+<strong>Cara meneroka:</strong> Baca ringkasan pada kad, kemudian tekan butang seperti <em>“Teroka latar hidup”</em>, <em>“Fahami idea”</em> atau <em>“Lihat konteks sejarah”</em>. Maklumat tambahan ini memberi konteks yang tidak semestinya terdapat pada infografik.
+</div>
+<section class="explorer" aria-label="Alat meneroka tokoh">
+<div class="explorer-top"><div><h2>Mulakan penerokaan</h2><p>Cari nama tokoh atau tapis mengikut tema untuk mencari maklumat dengan cepat.</p></div>
+<label class="searchbox"><input id="tokohSearch" type="search" placeholder="Cari tokoh atau kata kunci…" aria-label="Cari tokoh atau kata kunci"></label></div>
+<div class="filters" role="group" aria-label="Tapis tokoh mengikut tema">
+<button class="filter active" data-filter="all" aria-pressed="true">Semua tokoh</button>
+<button class="filter" data-filter="dasar" aria-pressed="false">Dasar pendidikan</button>
+<button class="filter" data-filter="bahasa" aria-pressed="false">Bahasa & pemikiran</button>
+<button class="filter" data-filter="masyarakat" aria-pressed="false">Masyarakat & nasionalisme</button>
+</div><div class="result-count" id="resultCount" aria-live="polite">6 tokoh dipaparkan</div>
+</section>
+<div class="grid">
+<section class="tokoh" id="razak" data-category="dasar" data-keywords="tun abdul razak penyata razak sekolah kebangsaan perpaduan dasar pendidikan">
+<div class="cardhead"><div class="number">Tokoh 01</div><h2>Tun Abdul Razak Hussein</h2><p class="role">Menteri Pelajaran pertama dalam kabinet selepas Pilihan Raya 1955; Perdana Menteri kedua Malaysia.</p></div>
+<div class="cardbody">
+<p>Untuk memahami peranannya dalam pendidikan, lihat keadaan sebelum sistem kebangsaan dibentuk dan mengapa penyelarasan pendidikan menjadi isu penting selepas perang.</p>
+<div><span class="pill">Penyata Razak</span><span class="pill">Sekolah kebangsaan</span><span class="pill">Perpaduan</span></div>
+<div class="actions"><button class="btn" data-target="razak-life">Teroka latar hidup</button><button class="btn alt" data-target="razak-idea">Fahami idea utama</button><button class="btn alt" data-target="razak-context">Lihat konteks sejarah</button></div>
+<div class="detail" id="razak-life"><h3>Latar kehidupan dan pengalaman</h3><p>Beliau dilahirkan di Pulau Keladi, Pekan, Pahang pada 11 Mac 1922 dan mendapat pendidikan di Maktab Melayu Kuala Kangsar serta melanjutkan pengajian di England. Pengalaman dalam pentadbiran dan politik membentuk pendekatannya yang menekankan perancangan serta pelaksanaan dasar pada skala negara.</p></div>
+<div class="detail" id="razak-idea"><h3>Mengapa penyelarasan pendidikan dianggap penting?</h3><p>Ketika itu, sistem persekolahan mempunyai aliran dan bahasa pengantar yang berbeza. Penyata Razak 1956 mencadangkan asas sistem pendidikan kebangsaan, termasuk kurikulum yang lebih selaras dan kedudukan Bahasa Melayu. Tujuannya ialah membina sistem yang boleh dikongsi oleh masyarakat berbilang kaum.</p></div>
+<div class="detail" id="razak-context"><h3>Perkara yang perlu diingat</h3><p>Penyata Razak bukan hasil seorang individu sahaja; ia lahir melalui jawatankuasa dan perbincangan dasar. Peranan Tun Abdul Razak penting kerana beliau mengetuai portfolio pendidikan dan menyokong usaha membina kerangka kebangsaan. Selepas itu, dasar pendidikan terus berkembang melalui laporan dan undang-undang lain.</p></div>
+</div></section>
+
+<section class="tokoh" id="talib" data-category="dasar" data-keywords="abdul rahman talib laporan rahman talib bahasa pengantar akses pendidikan dasar">
+<div class="cardhead"><div class="number">Tokoh 02</div><h2>Abdul Rahman Talib</h2><p class="role">Menteri Pelajaran yang dikaitkan dengan semakan dasar pendidikan pada tahun 1960.</p></div>
+<div class="cardbody">
+<p>Kad ini menerangkan mengapa sistem pendidikan perlu dinilai semula selepas cadangan awal sistem kebangsaan diperkenalkan.</p>
+<div><span class="pill">Laporan Rahman Talib</span><span class="pill">Akses pendidikan</span><span class="pill">Bahasa pengantar</span></div>
+<div class="actions"><button class="btn" data-target="talib-life">Teroka latar hidup</button><button class="btn alt" data-target="talib-idea">Fahami laporan</button><button class="btn alt" data-target="talib-context">Lihat konteks sejarah</button></div>
+<div class="detail" id="talib-life"><h3>Latar kerjaya</h3><p>Abdul Rahman Talib ialah tokoh politik yang memegang beberapa jawatan dalam kerajaan Persekutuan. Beliau menjadi Menteri Pelajaran pada awal 1960-an. Pengalaman pentadbiran ini berlaku ketika kerajaan sedang menilai cara memperkukuh pelaksanaan dasar pendidikan selepas merdeka.</p></div>
+<div class="detail" id="talib-idea"><h3>Mengapa laporan susulan diperlukan?</h3><p>Laporan Rahman Talib 1960 meneliti pelaksanaan cadangan pendidikan terdahulu dan mengemukakan langkah penambahbaikan. Perbincangannya berkaitan peluasan pendidikan, pengukuhan bahasa kebangsaan dan hala tuju persekolahan. Cadangan laporan itu kemudiannya mempengaruhi perkembangan dasar serta perundangan pendidikan pada awal 1960-an.</p></div>
+<div class="detail" id="talib-context"><h3>Bezakan tokoh dengan dokumen</h3><p>Abdul Rahman Talib ialah pengerusi/tokoh yang namanya dikaitkan dengan laporan tersebut, tetapi laporan ialah hasil kerja jawatankuasa dan proses pentadbiran. Jangan menyamakan beliau dengan Tun Abdul Razak atau mengaitkan Penyata Razak 1956 secara langsung sebagai laporan yang disediakan oleh Abdul Rahman Talib.</p></div>
+</div></section>
+
+<section class="tokoh" id="aminuddin" data-category="dasar bahasa" data-keywords="aminuddin baki peluang pendidikan penyelidikan pendidikan kepimpinan murid mutu sekolah">
+<div class="cardhead"><div class="number">Tokoh 03</div><h2>Aminuddin Baki</h2><p class="role">Pemikir pendidikan dan pegawai kanan pendidikan yang memberi perhatian kepada peluang serta mutu persekolahan.</p></div>
+<div class="cardbody">
+<p>Selain jawatan dan sumbangan, teroka bagaimana beliau mengangkat isu pengalaman murid dan keperluan memperbaiki sistem sekolah.</p>
+<div><span class="pill">Peluang pendidikan</span><span class="pill">Penyelidikan pendidikan</span><span class="pill">Kepimpinan murid</span></div>
+<div class="actions"><button class="btn" data-target="aminuddin-life">Teroka latar hidup</button><button class="btn alt" data-target="aminuddin-idea">Fahami pemikiran</button><button class="btn alt" data-target="aminuddin-context">Lihat pendekatan</button></div>
+<div class="detail" id="aminuddin-life"><h3>Latar kehidupan dan pembelajaran</h3><p>Aminuddin Baki dilahirkan di Chemor, Perak pada 1926. Beliau melanjutkan pengajian dan terlibat dalam gerakan pelajar Melayu. Pengalaman sebagai pelajar dan pendidik membantu membentuk kepekaannya terhadap cabaran murid serta ketidaksamaan peluang dalam pendidikan.</p></div>
+<div class="detail" id="aminuddin-idea"><h3>Pendidikan perlu memahami masalah sebenar murid</h3><p>Beliau dikenali kerana memberi perhatian kepada kelemahan pembelajaran dan peluang murid Melayu memasuki pendidikan menengah. Pendekatan ini menunjukkan bahawa dasar pendidikan bukan sekadar tentang bangunan atau peraturan; pembuat dasar juga perlu meneliti halangan yang dihadapi murid, kandungan pembelajaran dan laluan pendidikan selepas sekolah rendah.</p></div>
+<div class="detail" id="aminuddin-context"><h3>Bagaimana idea boleh diterapkan hari ini?</h3><p>Guru boleh mengambil iktibar dengan mengenal pasti keperluan murid melalui pentaksiran, memberi sokongan berbeza mengikut tahap penguasaan dan menilai sama ada setiap murid mempunyai peluang yang adil untuk belajar. Ini ialah aplikasi semasa daripada prinsip mengambil berat tentang masalah pembelajaran—bukan dakwaan bahawa beliau menggunakan kaedah digital moden.</p></div>
+</div></section>
+
+<section class="tokoh" id="zaba" data-category="bahasa" data-keywords="za ba zainal abidin ahmad bahasa melayu penulisan tatabahasa pemikiran kritis">
+<div class="cardhead"><div class="number">Tokoh 04</div><h2>Zainal Abidin Ahmad (Za’ba)</h2><p class="role">Cendekiawan, penulis dan tokoh pembaharuan bahasa Melayu.</p></div>
+<div class="cardbody">
+<p>Teroka bagaimana bahasa, penulisan dan pemikiran kritis berkait dengan pendidikan serta pembinaan masyarakat yang berilmu.</p>
+<div><span class="pill">Bahasa Melayu</span><span class="pill">Penulisan</span><span class="pill">Pemikiran kritis</span></div>
+<div class="actions"><button class="btn" data-target="zaba-life">Teroka latar hidup</button><button class="btn alt" data-target="zaba-idea">Fahami pemikiran</button><button class="btn alt" data-target="zaba-context">Lihat warisan bahasa</button></div>
+<div class="detail" id="zaba-life"><h3>Latar kehidupan dan kerjaya</h3><p>Za’ba dilahirkan di Negeri Sembilan pada 1895 dan bekerja dalam bidang pendidikan serta penulisan. Beliau menghasilkan tulisan yang membantu pembaca memahami penggunaan bahasa Melayu dengan lebih tersusun. Karya-karyanya muncul ketika pendidikan moden dan penerbitan Melayu sedang berkembang.</p></div>
+<div class="detail" id="zaba-idea"><h3>Bahasa sebagai alat berfikir</h3><p>Usaha menghuraikan tatabahasa dan penggunaan bahasa bukan hanya tentang betul atau salah. Bahasa yang jelas membantu seseorang menyusun hujah, menyampaikan ilmu dan menilai idea. Melalui penulisan, Za’ba turut menggalakkan pembaca berfikir tentang kemajuan masyarakat dan kepentingan ilmu.</p></div>
+<div class="detail" id="zaba-context"><h3>Warisan dalam pembelajaran masa kini</h3><p>Dalam bilik darjah, murid boleh meneliti cara memilih perkataan, membina ayat dan menyokong pendapat dengan alasan. Guru juga boleh menggunakan teks Za’ba sebagai bahan untuk membincangkan perubahan bahasa mengikut zaman. Ini menghubungkan warisan bahasa dengan literasi dan pemikiran kritis.</p></div>
+</div></section>
+
+<section class="tokoh" id="burhanuddin" data-category="masyarakat bahasa" data-keywords="burhanuddin al helmi nasionalisme masyarakat penulisan agama politik pendidikan masyarakat">
+<div class="cardhead"><div class="number">Tokoh 05</div><h2>Dr. Burhanuddin al-Helmi</h2><p class="role">Doktor, penulis dan tokoh nasionalisme yang menulis tentang masyarakat, agama dan politik.</p></div>
+<div class="cardbody">
+<p>Maklumat tambahan ini memberi konteks kepada keluasan kegiatan beliau, di samping menggalakkan pembaca membezakan perjuangan politik dengan sumbangan pendidikan formal.</p>
+<div><span class="pill">Penulisan</span><span class="pill">Nasionalisme</span><span class="pill">Pemikiran masyarakat</span></div>
+<div class="actions"><button class="btn" data-target="burhanuddin-life">Teroka latar hidup</button><button class="btn alt" data-target="burhanuddin-idea">Fahami pemikiran</button><button class="btn alt" data-target="burhanuddin-context">Baca secara kritis</button></div>
+<div class="detail" id="burhanuddin-life"><h3>Latar kehidupan</h3><p>Burhanuddin al-Helmi (1911–1969) mendapat pendidikan agama dan kemudian menjadi doktor homeopati. Beliau aktif dalam penulisan dan gerakan politik. Latar yang pelbagai ini menjadikan beliau tokoh yang terlibat dalam perbincangan tentang identiti, kemerdekaan dan masa depan masyarakat Melayu.</p></div>
+<div class="detail" id="burhanuddin-idea"><h3>Penulisan sebagai ruang menyampaikan idea</h3><p>Beliau menulis karya berkaitan kebangsaan, agama dan politik, termasuk buku yang membincangkan falsafah kebangsaan serta hubungan agama dan politik. Penulisan seperti ini menjadi bahan untuk memahami pemikiran pada zaman perjuangan kemerdekaan dan bagaimana idea disebarkan kepada masyarakat.</p></div>
+<div class="detail" id="burhanuddin-context"><h3>Bagaimana menilai sumbangannya dengan tepat?</h3><p>Burhanuddin al-Helmi lebih dikenali sebagai tokoh nasionalisme dan pemikir politik berbanding penggubal dasar pendidikan negara. Jika beliau dimasukkan dalam tema pendidikan, jelaskan hubungannya melalui pendidikan masyarakat, penulisan dan pembinaan kesedaran—jangan mendakwa beliau menggubal laporan pendidikan tanpa bukti khusus.</p></div>
+</div></section>
+
+<section class="tokoh" id="yakub" data-category="dasar masyarakat" data-keywords="tun abdul rahman yakub sarawak bahasa malaysia menteri pelajaran dasar pendidikan">
+<div class="cardhead"><div class="number">Tokoh 06</div><h2>Tun Abdul Rahman Ya’kub</h2><p class="role">Tokoh Sarawak; pernah menjadi Menteri Pelajaran Malaysia dan Ketua Menteri Sarawak.</p></div>
+<div class="cardbody">
+<p>Teroka laluan kerjaya beliau dan konteks pendidikan kebangsaan pada hujung 1960-an serta awal 1970-an.</p>
+<div><span class="pill">Sarawak</span><span class="pill">Bahasa pengantar</span><span class="pill">Pentadbiran</span></div>
+<div class="actions"><button class="btn" data-target="yakub-life">Teroka latar hidup</button><button class="btn alt" data-target="yakub-idea">Fahami konteks pendidikan</button><button class="btn alt" data-target="yakub-context">Bezakan fakta tokoh</button></div>
+<div class="detail" id="yakub-life"><h3>Latar kehidupan dan kerjaya</h3><p>Tun Abdul Rahman Ya’kub dilahirkan di Kampung Jepak, Bintulu pada 1928. Beliau bekerja dalam perkhidmatan awam dan bidang undang-undang sebelum aktif dalam politik. Beliau menjadi Menteri Pelajaran Malaysia pada 1969–1970, Ketua Menteri Sarawak pada 1970–1981, dan kemudian Yang di-Pertua Negeri Sarawak.</p></div>
+<div class="detail" id="yakub-idea"><h3>Memahami pendidikan dalam konteks persekutuan</h3><p>Ketika beliau memegang portfolio Menteri Pelajaran, pelaksanaan dasar pendidikan kebangsaan dan peluasan penggunaan Bahasa Malaysia sebagai bahasa pengantar merupakan sebahagian daripada agenda pendidikan negara. Perubahan ini berlaku secara berperingkat melalui dasar dan tindakan kerajaan, bukan melalui seorang tokoh sahaja.</p></div>
+<div class="detail" id="yakub-context"><h3>Fakta yang sering tertukar</h3><p>Penyata Razak 1956 dikaitkan dengan Tun Abdul Razak Hussein, bukan Tun Abdul Rahman Ya’kub. Ya’kub memegang jawatan Menteri Pelajaran lebih sedekad kemudian. Membezakan kedua-dua tokoh ini penting supaya kronologi dan sumbangan mereka tidak bercampur dalam e-portfolio.</p></div>
+</div></section>
+</div>
+<div class="empty-state" id="emptyState">Tiada tokoh ditemui. Cuba kata kunci lain atau pilih “Semua tokoh”.</div>
+
+<section class="bigidea" id="rumusan">
+<h2>Apa yang boleh dipelajari daripada enam tokoh ini?</h2>
+<p>Perubahan pendidikan terbentuk melalui gabungan dasar kerajaan, kerja jawatankuasa, pemikiran pendidik, bahasa, penulisan dan keperluan masyarakat. Setiap tokoh bergerak dalam konteks zamannya. Apabila menerangkan tokoh, bezakan fakta biografi, jawatan, dokumen dasar dan tafsiran tentang kesannya.</p>
+</section>
+
+
+</main>
+<footer>Teroka Tokoh, Fahami Pemikiran • Bahan tambahan interaktif untuk e-portfolio</footer>
+<audio id="music" src="muzik-latar.mp3" loop preload="metadata"></audio>
+<audio id="sfx" src="bunyi-interaksi.mp3" preload="auto"></audio>
+<script>
+const music=document.getElementById('music'),sfx=document.getElementById('sfx');
+let soundOn=true; music.volume=.20; sfx.volume=.5;
+document.getElementById('musicBtn').addEventListener('click',async()=>{
+ if(music.paused){try{await music.play();document.getElementById('musicBtn').textContent='❚❚ Hentikan muzik latar'}catch(e){document.getElementById('musicBtn').textContent='Tekan untuk cuba mainkan muzik'}}
+ else{music.pause();document.getElementById('musicBtn').textContent='▶ Mainkan muzik latar'}
+});
+document.getElementById('soundBtn').addEventListener('click',()=>{
+ soundOn=!soundOn;document.getElementById('soundBtn').textContent='Bunyi interaksi: '+(soundOn?'ON':'OFF');playSfx();
+});
+function playSfx(){if(!soundOn)return;try{sfx.currentTime=0;sfx.play()}catch(e){}}
+document.querySelectorAll('[data-target]').forEach(btn=>{
+ btn.setAttribute('aria-expanded','false');
+ btn.addEventListener('click',()=>{
+  const detail=document.getElementById(btn.dataset.target);
+  const wasOpen=detail.classList.contains('open');
+  detail.classList.toggle('open');
+  btn.setAttribute('aria-expanded',String(!wasOpen));
+  const original=btn.dataset.label || btn.textContent.replace(/^Tutup: /,'');
+  btn.dataset.label=original;
+  btn.textContent=wasOpen?original:'Tutup: '+original;
+  if(!wasOpen){detail.scrollIntoView({behavior:'smooth',block:'nearest'})}
+  playSfx();
+ });
+});
+const searchInput=document.getElementById('tokohSearch');
+const filterButtons=[...document.querySelectorAll('[data-filter]')];
+const cards=[...document.querySelectorAll('.tokoh')];
+let activeFilter='all';
+function updateCards(){
+ const query=searchInput.value.trim().toLocaleLowerCase('ms'); let shown=0;
+ cards.forEach(card=>{
+  const text=(card.innerText+' '+card.dataset.keywords+' '+card.dataset.category).toLocaleLowerCase('ms');
+  const matchesText=!query||text.includes(query);
+  const matchesFilter=activeFilter==='all'||card.dataset.category.split(' ').includes(activeFilter);
+  const visible=matchesText&&matchesFilter; card.hidden=!visible; if(visible)shown++;
+ });
+ document.getElementById('resultCount').textContent=shown+' daripada '+cards.length+' tokoh dipaparkan';
+ document.getElementById('emptyState').style.display=shown?'none':'block';
+}
+searchInput.addEventListener('input',updateCards);
+filterButtons.forEach(btn=>btn.addEventListener('click',()=>{
+ activeFilter=btn.dataset.filter;
+ filterButtons.forEach(b=>{const active=b===btn;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});
+ updateCards();playSfx();
+}));
+function updateReadingProgress(){const root=document.documentElement;const max=root.scrollHeight-root.clientHeight;document.getElementById('progressBar').style.width=(max>0?(root.scrollTop/max)*100:0)+'%'}
+window.addEventListener('scroll',updateReadingProgress,{passive:true});updateReadingProgress();
+// Animasi masuk hanya apabila kad menghampiri paparan; hormati tetapan reduced motion.
+if('IntersectionObserver' in window&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+ const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('seen');observer.unobserve(entry.target)}}),{threshold:.08});
+ cards.forEach(card=>observer.observe(card));
+}
+</script>
+</body>
+</html>
